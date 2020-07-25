@@ -9,7 +9,10 @@
   },
   "dependencies": {
     "core-js": "^3.6.5",
-    "vue": "^2.6.11"
+    "jquery": "^3.5.1",
+    "jquery-mask-plugin": "^1.14.16",
+    "vue": "^2.6.11",
+    "vue-the-mask": "^0.11.1"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.4.0",
