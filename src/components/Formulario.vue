@@ -5,18 +5,34 @@
       <div class="contato">
         <div class="campos" v-for="(dado, index) in formulario" :key="index">
           <label>{{ dado.title }}</label>
-          <input :style="{borderColor: cor}"  v-model="campos[index]" type="text" :placeholder="dado.placeholder" />
+          <input
+            :style="{ borderColor: cor }"
+            v-model="campos[index]"
+            type="text"
+            :placeholder="dado.placeholder"
+          />
         </div>
         <span v-if="erro">PREENCHA TODOS OS CAMPOS</span>
       </div>
-      <input :style="{borderColor: cor}" v-model="numero" type="tel" placeholder="telefone" v-mask="'(##) ####-####'" />
+      <label>Telefone</label>
+      <input
+        :style="{ borderColor: cor }"
+        v-model="telefone"
+        type="tel"
+        placeholder="telefone"
+        v-mask="'(##) ####-####'"
+      />
 
       <div>
-        <button :style="{ background: cor }" @click="addcampo" type="button">Add campo</button>
+        <button :style="{ background: cor }" @click="addcampo" type="button">
+          Add campo
+        </button>
       </div>
 
       <div>
-        <button :style="{ background: cor }" @click="submit" type="button">Submit</button>
+        <button :style="{ background: cor }" @click="submit" type="button">
+          Submit
+        </button>
       </div>
     </form>
     <div class="cores">
@@ -24,7 +40,9 @@
       <span @click="cor = '#87f'"></span>
       <span @click="cor = 'green'"></span>
     </div>
-    <DadosCadastrados />
+    <div >
+      <DadosCadastrados :campos="campos" />
+    </div>
   </div>
 </template>
 
@@ -39,7 +57,7 @@ export default {
     return {
       cor: "",
       erro: false,
-      numero: "",
+      telefone: "",
       campos: [],
       formulario: [
         {
@@ -69,14 +87,22 @@ export default {
           campos.push(item);
         }
       });
-      if (this.formulario.length > campos.length || this.numero === "") {
+      if (this.formulario.length > campos.length || this.telefone === "") {
         this.erro = true;
         setTimeout(() => {
           this.erro = false;
         }, 1500);
       }
+     
+      
     },
+    
   },
+  watch: {
+    telefone(){
+
+    }
+  }
 };
 </script>
 

@@ -1,11 +1,11 @@
 <template>
-  <div></div>
+  <div>{{campos}}</div>
 </template>
 
 <script>
 export default {
   name: "dadosCadastrados",
-  props: [""]
+  props: ["campos"]
 }
 </script>
 
