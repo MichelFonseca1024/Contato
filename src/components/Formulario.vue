@@ -69,7 +69,7 @@ export default {
           campos.push(item);
         }
       });
-      if (this.formulario.length > campos.length) {
+      if (this.formulario.length > campos.length || this.numero === "") {
         this.erro = true;
         setTimeout(() => {
           this.erro = false;
