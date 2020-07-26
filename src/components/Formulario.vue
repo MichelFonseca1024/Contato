@@ -7,12 +7,11 @@
           <label>{{ dado.title }}</label>
           <input
             :style="{ borderColor: cor }"
-            v-model="campos[index]"
+            v-model="campos[dado.title]"
             type="text"
             :placeholder="dado.placeholder"
           />
         </div>
-        <span v-if="erro">PREENCHA TODOS OS CAMPOS</span>
       </div>
       <label>Telefone</label>
       <input
@@ -22,26 +21,30 @@
         placeholder="telefone"
         v-mask="'(##) ####-####'"
       />
-
+      <span v-if="erro">PREENCHA TODOS OS CAMPOS</span>
       <div>
+        <p>Adcionar novo campo</p>
+        <p>Titulo do campo</p>
+        <input type="text" v-model="novoCampo" />
         <button :style="{ background: cor }" @click="addcampo" type="button">
           Add campo
         </button>
       </div>
 
       <div>
-        <button :style="{ background: cor }" @click="submit" type="button">
+        <button :style="{ background: cor }" @click="submeter" type="button">
           Submit
         </button>
       </div>
     </form>
+    {{ x }}
     <div class="cores">
       <span @click="cor = 'black'"></span>
       <span @click="cor = '#87f'"></span>
       <span @click="cor = 'green'"></span>
     </div>
-    <div >
-      <DadosCadastrados :campos="campos" />
+    <div>
+      <DadosCadastrados />
     </div>
   </div>
 </template>
@@ -55,10 +58,12 @@ export default {
   },
   data() {
     return {
+      x: "",
+      novoCampo: "",
       cor: "",
       erro: false,
       telefone: "",
-      campos: [],
+      campos: {},
       formulario: [
         {
           title: "Nome",
@@ -74,35 +79,40 @@ export default {
 
   methods: {
     addcampo() {
-      this.formulario.push({
-        title: "QQR",
-        placeholder: "qqr",
-      });
-    },
+      if (this.novoCampo !== "") {
+        this.formulario.push({
+          title: this.novoCampo,
+          placeholder: this.novoCampo,
+        });
+      }
 
-    submit() {
-      let campos = [];
-      this.campos.forEach((item) => {
-        if (item !== null && item !== "") {
-          campos.push(item);
+      this.novoCampo = "";
+    },
+    submeter() {
+      let campos = {};
+      Object.keys(this.campos).forEach((item) => {
+        if (this.campos[item] !== null && this.campos[item] !== "") {
+          campos[item] = this.campos[item];
         }
       });
-      if (this.formulario.length > campos.length || this.telefone === "") {
+      if (
+        this.formulario.length > Object.keys(campos).length ||
+        this.telefone === ""
+      ) {
         this.erro = true;
         setTimeout(() => {
           this.erro = false;
         }, 1500);
+      } else {
+        this.campos["telefone"] = this.telefone;
+        console.log(this.campos);
+        this.x = this.campos;
+        this.$store.commit("adcionarFormulario", this.campos);
+        this.campos = {};
+        this.telefone = "";
       }
-     
-      
     },
-    
   },
-  watch: {
-    telefone(){
-
-    }
-  }
 };
 </script>
 
