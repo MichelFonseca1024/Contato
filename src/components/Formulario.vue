@@ -37,7 +37,7 @@
         </button>
       </div>
     </form>
-    {{ x }}
+
     <div class="cores">
       <span @click="cor = 'black'"></span>
       <span @click="cor = '#87f'"></span>
@@ -58,7 +58,6 @@ export default {
   },
   data() {
     return {
-      x: "",
       novoCampo: "",
       cor: "",
       erro: false,
@@ -122,7 +121,9 @@ export default {
   margin: 0 auto;
   padding: 20px;
   box-sizing: border-box;
-  background: #4fc08d url("https://www.mundojs.com.br/wp-content/uploads/2019/12/vue-1232x603.jpeg") no-repeat;
+  background: #4fc08d
+    url("https://www.mundojs.com.br/wp-content/uploads/2019/12/vue-1232x603.jpeg")
+    no-repeat;
   background-size: 100%;
 }
 
