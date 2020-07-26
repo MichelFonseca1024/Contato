@@ -1,5 +1,5 @@
 <template>
-  <div></div>
+  <div>{{this.$store.state.formularios}}</div>
 </template>
 
 <script>
