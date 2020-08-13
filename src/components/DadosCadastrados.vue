@@ -1,9 +1,9 @@
 <template>
   <section>
-    <div v-for="(formulario, key, index) in formularios" :key="index">
-      <div v-for="(campo, nome, index) in formulario" :key="index">
-        <p>{{ nome }}</p>
-        <p>{{ campo }}</p>
+    <div class="form" v-for="(formulario, key, index) in formularios" :key="index">
+      <div class="campos" v-for="(campo, nome, index) in formulario" :key="index">
+        <div>{{ nome }}</div>
+        <div>{{ campo }}</div>
       </div>
     </div>
   </section>
@@ -28,4 +28,24 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+.form {
+  background: #fff;
+  border-radius: 4px;
+  margin: 20px 0;
+  box-sizing: border-box;
+  padding: 15px;
+}
+
+.campos {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  line-height: 40px;
+  border-bottom: 1px solid #c2c2c2;
+}
+
+.campos :nth-child(1) {
+  text-transform: capitalize;
+  text-align: center;
+}
+</style>
